@@ -1,53 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>XO Game</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe by souhailff</title>
+  <style>
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #eee;
+      border: 1px solid #aaa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>XO Game</h1>
-    <div id="container">
-        <div class="block">
-            <div id="box1" class="box top left">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box2" class="box top">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box3" class="box top right">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-        </div>
-        <div class="block">
-            <div id="box4" class="box left">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box5" class="box">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box6" class="box right">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-        </div>
-        <div class="block">
-            <div id="box7" class="box bottom left">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box8" class="box bottom">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box9" class="box bottom right">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-        </div>
-    </div>
 
-    <script src="index.js"></script>
+<div class="board" id="board"></div>
+
+<script>
+  const board = document.getElementById('board');
+  const cells = [];
+  let currentPlayer = 'X';
+
+  // Initialize the board
+  for (let i = 0; i < 9; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    cell.dataset.index = i;
+    cell.addEventListener('click', () => handleCellClick(i));
+    board.appendChild(cell);
+    cells.push(cell);
+  }
+
+  // Function to handle cell click
+  function handleCellClick(index) {
+    if (cells[index].textContent === '') {
+      cells[index].textContent = currentPlayer;
+      checkWinner();
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+  }
+
+  // Function to check for a winner
+  function checkWinner() {
+    const winningCombinations = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+      [0, 4, 8], [2, 4, 6]              // Diagonals
+    ];
+
+    for (const combination of winningCombinations) {
+      const [a, b, c] = combination;
+      if (cells[a].textContent &&
+          cells[a].textContent === cells[b].textContent &&
+          cells[a].textContent === cells[c].textContent) {
+        alert(`${cells[a].textContent} wins!`);
+        resetBoard();
+        return;
+      }
+    }
+
+    // Check for a tie
+    if (cells.every(cell => cell.textContent !== '')) {
+      alert("It's a tie!");
+      resetBoard();
+    }
+  }
+
+  // Function to reset the board
+  function resetBoard() {
+    cells.forEach(cell => {
+      cell.textContent = '';
+    });
+    currentPlayer = 'X';
+  }
+</script>
+
 </body>
-
 </html>
