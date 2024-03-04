@@ -84,7 +84,7 @@ button:focus{
 }
 
 .activeBox{
-    background: silver;
+    background: rgb(126, 120, 120);
 }
 
 @keyframes larger{
