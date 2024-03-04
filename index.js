@@ -1,81 +1,84 @@
-// Initialize game variables
-let currentPlayer = 'X';
-let board = [
-  ['', '', ''],
-  ['', '', ''],
-  ['', '', '']
-];
+var playerTurn, moves, isGameOver, span, restartButton;
+playerTurn = "x";
+moves = 0;
+isGameOver = false;
+span = document.getElementsByTagName("span");
+restartButton = '<button onclick="playAgain()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16"><path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/><path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/></svg></button>';
 
-// Function to check if a player has won
-function checkWin(player) {
-  // Check rows and columns
-  for (let i = 0; i < 3; i++) {
-    if (board[i][0] === player && board[i][1] === player && board[i][2] === player) {
-      return true; // Row win
+function play(y) {
+    if (y.dataset.player == "none" && window.isGameOver == false) {
+        y.innerHTML = playerTurn;
+        y.dataset.player = playerTurn;
+        moves++;
+        if (playerTurn == "x") {
+            playerTurn = "o";
+        } else if (playerTurn == "o") {
+            playerTurn = "x";
+        }
     }
-    if (board[0][i] === player && board[1][i] === player && board[2][i] === player) {
-      return true; // Column win
-    }
-  }
-  // Check diagonals
-  if (board[0][0] === player && board[1][1] === player && board[2][2] === player) {
-    return true; // Diagonal win
-  }
-  if (board[0][2] === player && board[1][1] === player && board[2][0] === player) {
-    return true; // Diagonal win
-  }
-  return false; // No win
+
+    /* Win Types */
+
+    checkWinner(1, 2, 3);
+    checkWinner(4, 5, 6);
+    checkWinner(7, 8, 9);
+    checkWinner(1, 4, 7);
+    checkWinner(2, 5, 8);
+    checkWinner(3, 6, 9);
+    checkWinner(1, 5, 9);
+    checkWinner(3, 5, 7);
+
+    /* No Winner */
+
+    if (moves == 9 && isGameOver == false) { draw(); }
+
 }
 
-// Function to check if the game is a draw
-function checkDraw() {
-  for (let row of board) {
-    for (let cell of row) {
-      if (cell === '') {
-        return false; // Game not draw
-      }
+function checkWinner(a, b, c) {
+    a--;
+    b--;
+    c--;
+    if ((span[a].dataset.player === span[b].dataset.player) && (span[b].dataset.player === span[c].dataset.player) && (span[a].dataset.player === span[c].dataset.player) && (span[a].dataset.player === "x" || span[a].dataset.player === "o") && isGameOver == false) {
+        span[a].parentNode.className += " activeBox";
+        span[b].parentNode.className += " activeBox";
+        span[c].parentNode.className += " activeBox";
+        gameOver(a);
     }
-  }
-  return true; // Game draw
 }
 
-// Function to handle player move
-function makeMove(row, col) {
-  // Check if cell is empty
-  if (board[row][col] === '') {
-    // Make move
-    board[row][col] = currentPlayer;
-    // Check for win or draw
-    if (checkWin(currentPlayer)) {
-      console.log(currentPlayer + ' wins!');
-      resetGame();
-    } else if (checkDraw()) {
-      console.log('It\'s a draw!');
-      resetGame();
-    } else {
-      // Switch player
-      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+function playAgain() {
+    document.getElementsByClassName("alert")[0].parentNode.removeChild(document.getElementsByClassName("alert")[0]);
+    resetGame();
+    window.isGameOver = false;
+    for (var k = 0; k < span.length; k++) {
+        span[k].parentNode.className = span[k].parentNode.className.replace("activeBox", "");
     }
-  } else {
-    console.log('Invalid move. Cell is already occupied.');
-  }
 }
 
-// Function to reset the game
 function resetGame() {
-  // Clear board
-  board = [
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', '']
-  ];
-  // Reset player
-  currentPlayer = 'X';
+    for (i = 0; i < span.length; i++) {
+        span[i].dataset.player = "none";
+        span[i].innerHTML = "&nbsp;";
+    }
+    playerTurn = "x";
 }
 
-// Example gameplay
-makeMove(0, 0); // X
-makeMove(1, 1); // O
-makeMove(0, 1); // X
-makeMove(1, 0); // O
-makeMove(0, 2); // X wins!
+function gameOver(a) {
+    var gameOverAlertElement = "<b>GAME OVER </b><br><br> Player " + span[a].dataset.player.toUpperCase() + ' Win !!! <br><br>' + restartButton;
+    var div = document.createElement("div");
+    div.className = "alert";
+    div.innerHTML = gameOverAlertElement;
+    document.getElementsByTagName("body")[0].appendChild(div);
+    window.isGameOver = true;
+    moves = 0;
+}
+
+function draw() {
+    var drawAlertElement = '<b>DRAW!!!</b><br><br>' + restartButton;
+    var div = document.createElement("div");
+    div.className = "alert";
+    div.innerHTML = drawAlertElement;
+    document.getElementsByTagName("body")[0].appendChild(div);
+    window.isGameOver = true;
+    moves = 0;
+}
