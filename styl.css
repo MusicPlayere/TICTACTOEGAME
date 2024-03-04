@@ -1,34 +1,59 @@
-/* Style for the Tic Tac Toe board */
-.board {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 5px;
+body,html
+{
+    margin: 0px;
+    color: #000000;
+    font-size: 1.3rem;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 
-/* Style for individual cells in the board */
-.cell {
-  width: 100px;
-  height: 100px;
-  background-color: #fff;
-  border: 1px solid #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
+.center
+{
+  text-align: center;
 }
 
-/* Style for X and O symbols */
-.cell.X::after {
-  content: "X";
+/* Game Board */
+#tic-tac-toe-board {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
 }
 
-.cell.O::after {
-  content: "O";
-}
-
-/* Style for hover effect */
-.cell:hover {
+/* Button Style */
+.button {
+  appearance: none;
+  background-color: #000000;
+  border: 2px solid #1A1A1A;
+  box-sizing: border-box;
+  color: #FFFFFF;
   cursor: pointer;
-  background-color: #ccc;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 5px;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 0px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform;
+}
+
+.button:disabled {
+  pointer-events: none;
+}
+
+.button:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  box-shadow: none;
+  transform: translateY(0);
 }

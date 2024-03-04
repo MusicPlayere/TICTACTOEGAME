@@ -1,88 +1,178 @@
-var playerTurn, moves, isGameOver, span, restartButton;
-playerTurn = "x";
-moves = 0;
-isGameOver = false;
-span = document.getElementsByTagName("span");
-restartButton = '<button onclick="playAgain()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16"><path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/><path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/></svg></button>';
+var count = 0;
+var player = 1;
+var board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
-// Initialize game variables
-let currentPlayer = 'X';
-let board = [
-  ['', '', ''],
-  ['', '', ''],
-  ['', '', '']
-];
+var canvas = document.getElementById("tic-tac-toe-board");
+var context = canvas.getContext('2d');
+var canvasSize = 500;
+var sectionSize = canvasSize / 3;
+canvas.width = canvasSize;
+canvas.height = canvasSize;
+context.translate(0.5, 0.5);
+context.lineWidth = 10;
 
-// Function to check if a player has won
-function checkWin(player) {
-  // Check rows and columns
-  for (let i = 0; i < 3; i++) {
-    if (board[i][0] === player && board[i][1] === player && board[i][2] === player) {
-      return true; // Row win
-    }
-    if (board[0][i] === player && board[1][i] === player && board[2][i] === player) {
-      return true; // Column win
-    }
-  }
-  // Check diagonals
-  if (board[0][0] === player && board[1][1] === player && board[2][2] === player) {
-    return true; // Diagonal win
-  }
-  if (board[0][2] === player && board[1][1] === player && board[2][0] === player) {
-    return true; // Diagonal win
-  }
-  return false; // No win
+/* Event Func */
+function main() {
+  document.getElementById("main").style.display = "block";
+  document.getElementById("learn").style.display = "none";
+  document.getElementById("game").style.display = "none";
 }
 
-// Function to check if the game is a draw
-function checkDraw() {
-  for (let row of board) {
-    for (let cell of row) {
-      if (cell === '') {
-        return false; // Game not draw
+/* Event Func */
+function start() {
+  document.getElementById("main").style.display = "none";
+  document.getElementById("learn").style.display = "none";
+  document.getElementById("game").style.display = "block";
+
+  canvas.addEventListener('mouseup', function (event) {
+    addPlayingPiece(getCanvasMousePosition(event));
+    drawBoard();
+    setTimeout(() => {
+      if(!checkWhoWin(1) && !checkWhoWin(2)){
+        checkIsOver();
+      }
+    }, 100);
+  });
+  drawBoard();
+}
+
+/* Event Func */
+function learn() {
+  document.getElementById("main").style.display = "none";
+  document.getElementById("learn").style.display = "block";
+  document.getElementById("game").style.display = "none";
+}
+
+/* Event Func */
+function exit() {
+  window.close();
+}
+
+function addPlayingPiece(mouse) {
+  var xCordinate;
+  var yCordinate;
+  for (var x = 0; x < 3; x++) {
+    for (var y = 0; y < 3; y++) {
+      xCordinate = x * sectionSize;
+      yCordinate = y * sectionSize;
+      if (
+        mouse.x >= xCordinate && mouse.x <= xCordinate + sectionSize &&
+        mouse.y >= yCordinate && mouse.y <= yCordinate + sectionSize && board[y][x] == 0
+      ) {
+        board[y][x] = player;
+        player = player == 1 ? 2 : 1;
+        count++;
       }
     }
   }
-  return true; // Game draw
 }
 
-// Function to handle player move
-function makeMove(row, col) {
-  // Check if cell is empty
-  if (board[row][col] === '') {
-    // Make move
-    board[row][col] = currentPlayer;
-    // Check for win or draw
-    if (checkWin(currentPlayer)) {
-      console.log(currentPlayer + ' wins!');
-      resetGame();
-    } else if (checkDraw()) {
-      console.log('It\'s a draw!');
-      resetGame();
-    } else {
-      // Switch player
-      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    }
-  } else {
-    console.log('Invalid move. Cell is already occupied.');
+function getCanvasMousePosition(event) {
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top
   }
 }
 
-// Function to reset the game
-function resetGame() {
-  // Clear board
-  board = [
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', '']
-  ];
-  // Reset player
-  currentPlayer = 'X';
+function clearPlayingArea(xCordinate, yCordinate) {
+  context.fillStyle = "#fff";
+  context.fillRect(
+    xCordinate,
+    yCordinate,
+    sectionSize,
+    sectionSize
+  );
 }
 
-// Example gameplay
-makeMove(0, 0); // X
-makeMove(1, 1); // O
-makeMove(0, 1); // X
-makeMove(1, 0); // O
-makeMove(0, 2); // X wins!
+function drawO(xCordinate, yCordinate) {
+  var halfSectionSize = (0.5 * sectionSize);
+  var centerX = xCordinate + halfSectionSize;
+  var centerY = yCordinate + halfSectionSize;
+  var radius = (sectionSize - 100) / 2;
+  var startAngle = 0 * Math.PI;
+  var endAngle = 2 * Math.PI;
+  context.beginPath();
+  context.arc(centerX, centerY, radius, startAngle, endAngle);
+  context.stroke();
+}
+
+function drawX(xCordinate, yCordinate) {
+  context.beginPath();
+  var offset = 50;
+  context.moveTo(xCordinate + offset, yCordinate + offset);
+  context.lineTo(xCordinate + sectionSize - offset, yCordinate + sectionSize - offset);
+  context.moveTo(xCordinate + offset, yCordinate + sectionSize - offset);
+  context.lineTo(xCordinate + sectionSize - offset, yCordinate + offset);
+  context.stroke();
+}
+
+function drawBoard() {
+  //Updating the Command
+  document.querySelector("#textPlayer").textContent = "(Current Player: " + player + " )";
+  document.querySelector("#textComd").textContent = "(Player " + (count % 2 + 1) + " can play now... )";
+
+  var xCordinate;
+  var yCordinate;
+  for (var x = 0; x < 3; x++) {
+    for (var y = 0; y < 3; y++) {
+      xCordinate = x * sectionSize;
+      yCordinate = y * sectionSize;
+      //Clearing First then Drawing 
+      clearPlayingArea(xCordinate, yCordinate);
+      if (board[y][x] === 1) {
+        drawX(xCordinate, yCordinate);
+      }
+      else if (board[y][x] === 2) {
+        {
+          drawO(xCordinate, yCordinate);
+        }
+      }
+    }
+  }
+
+  //DRAW LINES of Boards
+  var lineStart = 4;
+  var lineLenght = canvasSize - 5;
+  context.beginPath();
+  for (var y = 1; y <= 2; y++) {
+    context.moveTo(lineStart, y * sectionSize);
+    context.lineTo(lineLenght, y * sectionSize);
+  }
+  for (var x = 1; x <= 2; x++) {
+    context.moveTo(x * sectionSize, lineStart);
+    context.lineTo(x * sectionSize, lineLenght);
+  }
+  context.stroke();
+}
+
+
+function checkWhoWin(number) {
+  //check win   number will be 1 or 2
+  // 1 for player is ONE
+  // 2 for player is TWO
+  let isWin = false;
+  for (let i = 0; i < 3; i++) {
+    if ((board[i][0] === number && board[i][1] === number && board[i][2] === number) || (board[0][i] === number && board[1][i] === number && board[2][i] === number)) {
+      isWin = true;
+      alert("Player " + number + " win the Game");
+      window.location.reload();
+    }
+  }
+  if ((board[0][0] === number && board[1][1] === number && board[2][2] === number) || (board[0][2] === number && board[1][1] === number && board[2][0] === number)) {
+    isWin = true;
+    alert("Player " + number + " win the Game");
+    window.location.reload();
+  }
+  return isWin;
+}
+
+function checkIsOver() {
+  //IF BOTH ARE NOT WIN AND NO NEXT MOVE
+  if (count >= 9) {
+    alert("Game is Over!!!");
+    window.location.reload();
+  }
+}
+
+window.onload = main(); //CALL ON LOAD
