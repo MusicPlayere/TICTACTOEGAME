@@ -1,53 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>XO Game</title>
+	<title>Tic Tac Toe</title>
+	<link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <h1>Simple XO Game</h1>
-    <div id="container">
-        <div class="block">
-            <div id="box1" class="box top left">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box2" class="box top">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box3" class="box top right">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-        </div>
-        <div class="block">
-            <div id="box4" class="box left">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box5" class="box">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box6" class="box right">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-        </div>
-        <div class="block">
-            <div id="box7" class="box bottom left">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box8" class="box bottom">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-            <div id="box9" class="box bottom right">
-                <span data-player="none" onclick="play(this)">&nbsp;</span>
-            </div>
-        </div>
-    </div>
-
-    <script src="index.js"></script>
+	<div class="container">
+		<h1>Tic Tac Toe</h1>
+		<div class="play-area">
+			<div id="block_0" class="block" onclick="addPlayerMove(0)"></div>
+			<div id="block_1" class="block" onclick="addPlayerMove(1)"></div>
+			<div id="block_2" class="block" onclick="addPlayerMove(2)"></div>
+			<div id="block_3" class="block" onclick="addPlayerMove(3)"></div>
+			<div id="block_4" class="block" onclick="addPlayerMove(4)"></div>
+			<div id="block_5" class="block" onclick="addPlayerMove(5)"></div>
+			<div id="block_6" class="block" onclick="addPlayerMove(6)"></div>
+			<div id="block_7" class="block" onclick="addPlayerMove(7)"></div>
+			<div id="block_8" class="block" onclick="addPlayerMove(8)"></div>
+		</div>
+		<h2 id="winner"></h2>
+		<button onclick="reset_board()">RESET BOARD</button>
+	</div>
+	<script src="index.js"></script>
 </body>
-
 </html>
