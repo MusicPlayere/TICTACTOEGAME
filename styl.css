@@ -1,13 +1,4 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
+/* Style for the Tic Tac Toe board */
 .board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
@@ -15,45 +6,29 @@ body {
   gap: 5px;
 }
 
+/* Style for individual cells in the board */
 .cell {
+  width: 100px;
+  height: 100px;
   background-color: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid #000;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2em;
-  cursor: pointer;
+  font-size: 24px;
 }
 
-.cell:hover {
-  background-color: #f0f0f0;
-}
-
-.cell.x::before {
+/* Style for X and O symbols */
+.cell.X::after {
   content: "X";
 }
 
-.cell.o::before {
+.cell.O::after {
   content: "O";
 }
 
-.message {
-  font-size: 1.5em;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.restart-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 1em;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
+/* Style for hover effect */
+.cell:hover {
   cursor: pointer;
-}
-
-.restart-button:hover {
-  background-color: #45a049;
+  background-color: #ccc;
 }
