@@ -1,26 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Tic Tac Toe</title>
-	<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe souhail</title>
+  <style>
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+    }
+  </style>
 </head>
 <body>
-	<div class="container">
-		<h1>Tic Tac Toe</h1>
-		<div class="play-area">
-			<div id="block_0" class="block" onclick="addPlayerMove(0)"></div>
-			<div id="block_1" class="block" onclick="addPlayerMove(1)"></div>
-			<div id="block_2" class="block" onclick="addPlayerMove(2)"></div>
-			<div id="block_3" class="block" onclick="addPlayerMove(3)"></div>
-			<div id="block_4" class="block" onclick="addPlayerMove(4)"></div>
-			<div id="block_5" class="block" onclick="addPlayerMove(5)"></div>
-			<div id="block_6" class="block" onclick="addPlayerMove(6)"></div>
-			<div id="block_7" class="block" onclick="addPlayerMove(7)"></div>
-			<div id="block_8" class="block" onclick="addPlayerMove(8)"></div>
-		</div>
-		<h2 id="winner"></h2>
-		<button onclick="reset_board()">RESET BOARD</button>
-	</div>
-	<script src="index.js"></script>
+
+<div class="board" onclick="handleClick(event)">
+  <div class="cell" data-index="0"></div>
+  <div class="cell" data-index="1"></div>
+  <div class="cell" data-index="2"></div>
+  <div class="cell" data-index="3"></div>
+  <div class="cell" data-index="4"></div>
+  <div class="cell" data-index="5"></div>
+  <div class="cell" data-index="6"></div>
+  <div class="cell" data-index="7"></div>
+  <div class="cell" data-index="8"></div>
+</div>
+
+<script>
+  let currentPlayer = "X";
+  const cells = document.querySelectorAll(".cell");
+
+  function handleClick(event) {
+    const cell = event.target;
+    if (cell.textContent === "") {
+      cell.textContent = currentPlayer;
+      if (checkWin()) {
+        alert(currentPlayer + " wins!");
+        resetBoard();
+      } else if (checkDraw()) {
+        alert("It's a draw!");
+        resetBoard();
+      } else {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+      }
+    }
+  }
+
+  function checkWin() {
+    const winConditions = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+      [0, 4, 8], [2, 4, 6] // Diagonals
+    ];
+    return winConditions.some(condition => {
+      const [a, b, c] = condition;
+      return cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent;
+    });
+  }
+
+  function checkDraw() {
+    return [...cells].every(cell => cell.textContent !== "");
+  }
+
+  function resetBoard() {
+    cells.forEach(cell => cell.textContent = "");
+    currentPlayer = "X";
+  }
+</script>
+
 </body>
 </html>
