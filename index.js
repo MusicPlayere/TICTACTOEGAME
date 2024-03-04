@@ -10,10 +10,10 @@ function play(y) {
         y.innerHTML = playerTurn;
         y.dataset.player = playerTurn;
         moves++;
-        if (playerTurn == "o") {
-            playerTurn = "x";
-        } else if (playerTurn == "x") {
+        if (playerTurn == "x") {
             playerTurn = "o";
+        } else if (playerTurn == "o") {
+            playerTurn = "x";
         }
     }
 
