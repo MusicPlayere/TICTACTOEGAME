@@ -1,48 +1,81 @@
-// an array to collect all the objects
-var moves = [];
+// Initialize game variables
+let currentPlayer = 'X';
+let board = [
+  ['', '', ''],
+  ['', '', ''],
+  ['', '', '']
+];
 
-// the original board
-var origBoard = ["O", 1, "X", "X", 4, "X", 6, "O", "O"];
-
-// human
-var huPlayer = "O";
-
-// ai
-var aiPlayer = "X";
-
-// returns list of the indexes of empty spots on the board
-function emptyIndexies(board) {
-  return board.filter((s) => s != "O" && s != "X");
+// Function to check if a player has won
+function checkWin(player) {
+  // Check rows and columns
+  for (let i = 0; i < 3; i++) {
+    if (board[i][0] === player && board[i][1] === player && board[i][2] === player) {
+      return true; // Row win
+    }
+    if (board[0][i] === player && board[1][i] === player && board[2][i] === player) {
+      return true; // Column win
+    }
+  }
+  // Check diagonals
+  if (board[0][0] === player && board[1][1] === player && board[2][2] === player) {
+    return true; // Diagonal win
+  }
+  if (board[0][2] === player && board[1][1] === player && board[2][0] === player) {
+    return true; // Diagonal win
+  }
+  return false; // No win
 }
 
-// winning combinations using the board indexies
-function winning(board, player) {
-  if (
-    (board[0] == player && board[1] == player && board[2] == player) ||
-    (board[3] == player && board[4] == player && board[5] == player) ||
-    (board[6] == player && board[7] == player && board[8] == player) ||
-    (board[0] == player && board[3] == player && board[6] == player) ||
-    (board[1] == player && board[4] == player && board[7] == player) ||
-    (board[2] == player && board[5] == player && board[8] == player) ||
-    (board[0] == player && board[4] == player && board[8] == player) ||
-    (board[2] == player && board[4] == player && board[6] == player)
-  ) {
-    return true;
+// Function to check if the game is a draw
+function checkDraw() {
+  for (let row of board) {
+    for (let cell of row) {
+      if (cell === '') {
+        return false; // Game not draw
+      }
+    }
+  }
+  return true; // Game draw
+}
+
+// Function to handle player move
+function makeMove(row, col) {
+  // Check if cell is empty
+  if (board[row][col] === '') {
+    // Make move
+    board[row][col] = currentPlayer;
+    // Check for win or draw
+    if (checkWin(currentPlayer)) {
+      console.log(currentPlayer + ' wins!');
+      resetGame();
+    } else if (checkDraw()) {
+      console.log('It\'s a draw!');
+      resetGame();
+    } else {
+      // Switch player
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
   } else {
-    return false;
+    console.log('Invalid move. Cell is already occupied.');
   }
 }
 
-// function to check for terminal states
-function terminal(board, player) {
-  if (winning(board, player)) {
-    return { winner: player };
-  } else if (emptyIndexies(board).length == 0) {
-    return { winner: null };
-  } else {
-    return { winner: undefined };
-  }
+// Function to reset the game
+function resetGame() {
+  // Clear board
+  board = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ];
+  // Reset player
+  currentPlayer = 'X';
 }
 
-// function to determine the score
-function evaluate(board) {
+// Example gameplay
+makeMove(0, 0); // X
+makeMove(1, 1); // O
+makeMove(0, 1); // X
+makeMove(1, 0); // O
+makeMove(0, 2); // X wins!

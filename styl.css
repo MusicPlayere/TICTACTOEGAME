@@ -1,41 +1,34 @@
-#board {
-  display: flex;
-  flex-wrap: wrap;
-  width: 200px;
-  height: 200px;
+/* Style for the Tic Tac Toe board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
 }
 
-.block {
-  width: 66.666px;
-  height: 66.666px;
-  border: 1px solid black;
+/* Style for individual cells in the board */
+.cell {
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+  border: 1px solid #000;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 3em;
-}
-
-.block i {
-  display: none;
-}
-
-.block.clicked i {
-  display: block;
-}
-
-#overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  font-size: 24px;
 }
 
-.overlayResetButton {
-  margin-top: 10px;
+/* Style for X and O symbols */
+.cell.X::after {
+  content: "X";
+}
+
+.cell.O::after {
+  content: "O";
+}
+
+/* Style for hover effect */
+.cell:hover {
+  cursor: pointer;
+  background-color: #ccc;
 }
