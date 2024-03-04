@@ -1,34 +1,101 @@
-/* Style for the Tic Tac Toe board */
-.board {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 5px;
+body{
+  background: ghostwhite;
+  color: dimgray;
+  font-family: serif;
+  text-align: center;
 }
 
-/* Style for individual cells in the board */
-.cell {
+h1{
+  font-size: 2rem;
+}
+
+#container{
+  margin: 5% auto;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.box{
+  display: inline-block;
+  border: 1px solid gray;
   width: 100px;
   height: 100px;
-  background-color: #fff;
-  border: 1px solid #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0;
 }
 
-/* Style for X and O symbols */
-.cell.X::after {
-  content: "X";
+span{
+  position: absolute;
+  font-size: 75px;
+  font-family: sans-serif;
+  text-align: center;
+  height: 75px;
+  width: 75px;
+  padding: 0;
+  margin: 5px;
+  margin-left: -35px;
 }
 
-.cell.O::after {
-  content: "O";
+.top{
+  border-top: none;
 }
 
-/* Style for hover effect */
-.cell:hover {
-  cursor: pointer;
-  background-color: #ccc;
+.bottom{
+  border-bottom: none;
+}
+
+.left{
+  border-left: none;
+}
+
+.right{
+  border-right: none;
+}
+
+.alert{
+  height: 75px;
+  width: 125px;
+  display: inline-block;
+  background: ghostwhite;
+  position: relative;
+  z-index: 10;
+  margin-top: -50%;
+  border-radius: 20px;
+  box-shadow: 0 0 75px 2px dimgray;
+  animation: larger 0.5s;
+  animation-fill-mode: forwards;
+  box-sizing: content-box;
+  padding: 30px;
+  bottom: 50px;
+  top: 0;
+}
+
+button{
+  background: dimgray;
+  border-radius: 2px;
+  color: ghostwhite;
+  border: none;
+  outline: none;
+}
+
+button:focus{
+  background: silver;
+}
+
+.activeBox{
+  background: silver;
+}
+
+@keyframes larger{
+  from{
+      height: 75px;
+      width: 125px;
+  }
+
+  to{
+      height: 100px;
+      width: 250px;
+  }
+
 }
