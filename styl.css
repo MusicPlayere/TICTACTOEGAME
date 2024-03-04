@@ -1,59 +1,101 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-.board {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 5px;
-}
-
-.cell {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2em;
-  cursor: pointer;
-}
-
-.cell:hover {
-  background-color: #f0f0f0;
-}
-
-.cell.x::before {
-  content: "X";
-}
-
-.cell.o::before {
-  content: "O";
-}
-
-.message {
-  font-size: 1.5em;
+body{
+  background: ghostwhite;
+  color: dimgray;
+  font-family: serif;
   text-align: center;
-  margin-top: 20px;
 }
 
-.restart-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 1em;
-  background-color: #4caf50;
-  color: #fff;
+h1{
+  font-size: 2rem;
+}
+
+#container{
+  margin: 5% auto;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.box{
+  display: inline-block;
+  border: 1px solid gray;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+span{
+  position: absolute;
+  font-size: 75px;
+  font-family: sans-serif;
+  text-align: center;
+  height: 75px;
+  width: 75px;
+  padding: 0;
+  margin: 5px;
+  margin-left: -35px;
+}
+
+.top{
+  border-top: none;
+}
+
+.bottom{
+  border-bottom: none;
+}
+
+.left{
+  border-left: none;
+}
+
+.right{
+  border-right: none;
+}
+
+.alert{
+  height: 75px;
+  width: 125px;
+  display: inline-block;
+  background: ghostwhite;
+  position: relative;
+  z-index: 10;
+  margin-top: -50%;
+  border-radius: 20px;
+  box-shadow: 0 0 75px 2px dimgray;
+  animation: larger 0.5s;
+  animation-fill-mode: forwards;
+  box-sizing: content-box;
+  padding: 30px;
+  bottom: 50px;
+  top: 0;
+}
+
+button{
+  background: dimgray;
+  border-radius: 2px;
+  color: ghostwhite;
   border: none;
-  cursor: pointer;
+  outline: none;
 }
 
-.restart-button:hover {
-  background-color: #45a049;
+button:focus{
+  background: silver;
+}
+
+.activeBox{
+  background: silver;
+}
+
+@keyframes larger{
+  from{
+      height: 75px;
+      width: 125px;
+  }
+
+  to{
+      height: 100px;
+      width: 250px;
+  }
+
 }
