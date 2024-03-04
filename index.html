@@ -1,46 +1,41 @@
 <html>
 
 <head>
-  <title>اكس اوو بداريجا</title>
+  <title>Tic Tac Toe</title>
   <meta name="description" content="Multiplayer Tic Tac Toe Game">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body class="center">
-  <h1>اكس اوو بداريجا ترحب بك</h2>
+  <h1>Tic Tac Toe Game</h2>
     <div class="center" id="main">
-      <h4>--لعب لوبيه--</h4>
-      <button onclick="start()" class="button">بدا لعبا جديدا</button>
+      <h4>--Play and Enjoy--</h4>
+      <button onclick="start()" class="button">Start a New Game</button>
       <br>
-      <button onclick="learn()" class="button">كفات كتلعب اكس او </button>
+      <button onclick="learn()" class="button">Learn How to Play GAME?</button>
       <br>
-      <button onclick="exit()" class="button">تخرج</button>
+      <button onclick="exit()" class="button">Exit</button>
     </div>
     <div class="center" id="learn">
       <p>
-        ننتاغدي تلعب xب .oصاحبك غدي يلغب ب  
+          You are X, your friend is O. 
           <br>
-          لعاب لي غدي يجمع 3 مربات بحال راسك غديي يربح بشرط هد المربعات يكونو اما لفوك ولالتاحت ولا بلعرض او الى مطبقاتش اي قاعد من هادو كتسالي لعبة شكرا لتجربتك لعبتنا جربموقعنا الخاص بالمسيقا بارسال رسالة ل 0777204234 في الواتساب
+          The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.
+          When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.
       </p>
-      <button onclick="main()" class="button">تخرج</button>
-    </div>
-    <div class="center" id="learn">
-      <p>
-         مسخيتيش بلوعبا لي بغي تخرج هه 
-          <br>
-          عاود شي طرح معا لي حداك 
-      </p>
-      <button onclick="main()" class="button">تخرج</button>
+      <img src="./image/learn.jpg" alt="Learn">
+      <br>
+      <button onclick="main()" class="button">Back</button>
     </div>
     <div class="center" id="game">
       <div class="center" style="margin: 5px;">
-        <h3 id="textPlayer" style="font-size: 0.9rem;">لعاب رقم 1 هو لي غادي يبدا</h2>
-          <h3 id="textComd" style="font-size: 0.9rem;">لعاب رقم 2 بامكانك تلعب دابا</h2>
+        <h3 id="textPlayer" style="font-size: 0.9rem;">(Current Player 1)</h2>
+          <h3 id="textComd" style="font-size: 0.9rem;">Player 2 can play now...</h2>
       </div>
       <canvas id="tic-tac-toe-board" class="center"></canvas>
     </div>
     <!-- Script OF Game -->
-    <script src=".index.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
