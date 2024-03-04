@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe by fihri</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Tic Tac Toei</h1>
-    <div id="board">
-        <div class="cell" onclick="makeMove(0)"></div>
-        <div class="cell" onclick="makeMove(1)"></div>
-        <div class="cell" onclick="makeMove(2)"></div>
-        <div class="cell" onclick="makeMove(3)"></div>
-        <div class="cell" onclick="makeMove(4)"></div>
-        <div class="cell" onclick="makeMove(5)"></div>
-        <div class="cell" onclick="makeMove(6)"></div>
-        <div class="cell" onclick="makeMove(7)"></div>
-        <div class="cell" onclick="makeMove(8)"></div>
-    </div>
-    <div id="message"></div>
-    <script src="index.js"></script>
-</body>
-</html>
+<div id="board">
+    <div class="block" id="0"></div>
+    <div class="block" id="1"></div>
+    <div class="block" id="2"></div>
+    <div class="block" id="3"></div>
+    <div class="block" id="4"></div>
+    <div class="block" id="5"></div>
+    <div class="block" id="6"></div>
+    <div class="block" id="7"></div>
+    <div class="block" id="8"></div>
+  </div>
+  <div id="overlay" style="display:none;">
+    <p id="text"></p>
+    <button class="overlayResetButton">Reset Game</button>
+  </div>

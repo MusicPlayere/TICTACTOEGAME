@@ -1,40 +1,48 @@
-let board = ["", "", "", "", "", "", "", "", ""];
-let currentPlayer = "X";
+// an array to collect all the objects
+var moves = [];
 
-function makeMove(index) {
-    if (board[index] === "") {
-        board[index] = currentPlayer;
-        document.getElementsByClassName("cell")[index].innerText = currentPlayer;
-        if (checkWinner(currentPlayer)) {
-            document.getElementById("message").innerText = `${currentPlayer} wins!`;
-            return;
-        } else if (board.every(cell => cell !== "")) {
-            document.getElementById("message").innerText = "It's a draw!";
-            return;
-        }
-        currentPlayer = currentPlayer === "X" ? "O" : "X";
-        if (currentPlayer === "O") {
-            setTimeout(computerMove, 500);
-        }
-    }
+// the original board
+var origBoard = ["O", 1, "X", "X", 4, "X", 6, "O", "O"];
+
+// human
+var huPlayer = "O";
+
+// ai
+var aiPlayer = "X";
+
+// returns list of the indexes of empty spots on the board
+function emptyIndexies(board) {
+  return board.filter((s) => s != "O" && s != "X");
 }
 
-function computerMove() {
-    let index;
-    do {
-        index = Math.floor(Math.random() * 9);
-    } while (board[index] !== "");
-    makeMove(index);
+// winning combinations using the board indexies
+function winning(board, player) {
+  if (
+    (board[0] == player && board[1] == player && board[2] == player) ||
+    (board[3] == player && board[4] == player && board[5] == player) ||
+    (board[6] == player && board[7] == player && board[8] == player) ||
+    (board[0] == player && board[3] == player && board[6] == player) ||
+    (board[1] == player && board[4] == player && board[7] == player) ||
+    (board[2] == player && board[5] == player && board[8] == player) ||
+    (board[0] == player && board[4] == player && board[8] == player) ||
+    (board[2] == player && board[4] == player && board[6] == player)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
-function checkWinner(player) {
-    const winningCombos = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],
-        [0, 4, 8], [2, 4, 6]
-    ];
-
-    return winningCombos.some(combo => {
-        return combo.every(index => board[index] === player);
-    });
+// function to check for terminal states
+function terminal(board, player) {
+  if (winning(board, player)) {
+    return { winner: player };
+  } else if (emptyIndexies(board).length == 0) {
+    return { winner: null };
+  } else {
+    return { winner: undefined };
+  }
 }
+
+// function to determine the score
+function evaluate(board) {
