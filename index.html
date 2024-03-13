@@ -1,233 +1,69 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Tic-Tac-Toe by souhaile</title>
-    <style>
-      .row > div {
-        border: 1px solid;
-        width: 60px;
-        height: 60px;
-        line-height: 60px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="board"></div>
+<html lang="en">
 
-    <script>
-      const board = [
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', '']
-      ];Sure, here's an updated version of the code that
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="logo.jpg">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+</head>
 
- includes AI moves:
-      const boardElement = document.getElementById('board');
+<body>
 
-     
-```html
-<!DOCTYPE html> function makeMove
-<html>Sure, here's an updated version of the code
-  <head(i, j, player) {
- that includes AI moves:
+    <div class="container">
+        <div class="signup-section">
+            <header>Signup</header>
 
->
-    <title>Tic-Tac        if (board[i][j]-Toe</title```html
- === '') {<!DOCTYPE html>
-<>
-    <style>
-          board[i][j
-      .row >html>
-  <] = player;
- div {
-        border:head>
-    <title          checkWin();
-         >Tic-T 1px solid;ac-Toe</ // Add AI move here
-        }
-        width: title>
-    <style
-      }
-60px>
-      .row > div;
-        height: 60px
-      function checkWin() {
-        {
-        border: 1 // Check rows, columns, and;
-        line-height: 60px diagonals for a win
-px solid;
-        width;
-        text-: 60px       ;
-        height: 6align: center;
-      for (let i =0px;
-        line 0; i < 3 }
-    </style-height: 60; i++) {
-          if (px;
-        text>
-  </headboard[i][0] !== '' && board[i][-align: center;
->
-0] === board[      }
-    </style>  <body>
-    <div id
-  </head="board"></divi][1] && board[>
-  <body>
->
+            <div class="social-buttons">
+                <button><i class='bx bxl-google'></i> Use Google</button>
+                <button><i class='bx bxl-Facebook'></i> Use Facebook</button>
+            </div>
 
-    <divi][0] === board[i][2    <script>
-      const board id="board"></div>
+            <div class="separator">
+                <div class="line"></div>
+                <p>Or</p>
+                <div class="line"></div>
+            </div>
 
- = [
-        [']) {
-    <script>
-                 alert(`Player ${board[i][0', '', ''],
-        ['', '', ''],
-]} wins on row ${i + const board = [
-        ['', '', ''],
- 1}!`);
-            return;
-                 ['', '', '']
-      ];
+            <form>
+                <input type="text" placeholder="Full name" required>
+                <input type="email" placeholder="Email address" required>
+                <input type="password" placeholder="Password" required>
+                <a href="#">Forget Password?</a>
+                <button type="submit" class="btn">Signup</button>
+            </form>
 
-             ['', '', ''],
- const board }
-          if        ['', '', '']
-      ];
+        </div>
 
-      constElement = document.getElementById('board');
+        <div class="login-section">
+            <header>Login</header>
 
-      (board[0][i] !== '' && function makeMove(i, boardElement = document.getElementById(' board j, player) {
-       board');
+            <div class="social-buttons">
+                <button><i class='bx bxl-google'></i> Use Google</button>
+                <button><i class='bx bxl-apple'></i> Use Apple</button>
+            </div>
 
-      function[0][i] === board makeMove(i, j, player[1][i] && board[0][i if (board[i][j]) {
-        if (board === '') {
-          board[i] === board[2][i]) {
-            alert(`Player[i][j] ===][j ${board[0][i '') {
-          board[] = player;
-          checkWin]} wins on column ${i + 1i][j] = player;
-();
-          // Add AI move here
-        }}!`);
-                     checkWin();
-          //
-      }
+            <div class="separator">
+                <div class="line"></div>
+                <p>Or</p>
+                <div class="line"></div>
+            </div>
 
-      function check Add AI move here
-        }Win() {
-        // Check rows return;
-          }
-        }
-, columns, and diagon
-      }
+            <form>
+                <input type="email" placeholder="Email address" required>
+                <input type="password" placeholder="Password" required>
+                <a href="#">Forget Password?</a>
+                <button type="submit" class="btn">Login</button>
+            </form>
 
-      function        if (board[0][0] !== '' && board[ checkWin() {
-        // Checkals for a win
-        for (let i =0][0] === 0; i < 3 rows, columns, and diagonals for a win
-; i++) {
-          if board[1][1] && board        for (let i = [0][0] (board[i][0] !== '' && board[i][00; i < 3; === board[2][2]) {
- i++) {
-          if (board          alert(`Player ${board[0] === board[i][1] && board[i][[i][0] !==][0]} wins '' && board[i][0]0] === board[i][2]) { on diagonal from top-left to bottom-right === board[i][1] && board
-            alert(`Player ${board!`);
-          return;
-       [i][0] === board[i][ }
-        if (board[0][2[i][0]} wins on row2]) {
-            alert(`] !== '' ${i + 1}!`);
-           Player ${board[i][ && board[0][2] === board0]} wins on row ${i return;
-          }
-          if (board[1][1] && board[0][2] === board[2 + 1}!`);
-           [0][i] !== '' && board][0]) {
- return;
-          }
-         [0][ if (board[0][i] === board[1][i]          alert(`Player ${board[0][i] !== '' && board[0 && board[0][i] === board[2][i][i] === board[1][i]2]} wins on diagonal from top-right to && board[0][i] ===]) {
-            alert(`Player bottom-left!`);
-          return;
-        }
-        // board[2][i]) {
-            alert ${board[0][i]} wins on Check for a tie
-        if (!board column ${i + 1}!(`Player ${board[0][i]}.flat().includes('')) {
-          alert('It\'s a wins on column ${i + `);
-            return;
-         1}!`);
-            }
-        } tie!');
-          return;
-        return;
-          }
-        }
+        </div>
 
-        if (board[0][0 }
-        if (board[] !== '' && board[      }
+    </div>
 
-      function aiMove() {
-        // Add AI logic here to choose0][0] !== '' && board[0][0] === board[1][1] && board[ the best0][0] === board[10][0][1] && board[0 move
-        // For simplicity, we'll just choose the] === board[2][2]) {
-          first available cell
-        for (let i][0] === board[2][ alert(`Player ${board[0][2]) {
-          alert(` = 0; i < 3Player ${board[0][0]}0]} wins on diagonal from top; i++) {
- wins on diagonal from top-left-          for (let j = 0 to bottom-right!`);
-; j <left to bottom-right!          return;
-        }
-        3; j++) {
-            if (board[i`);
-          return;
-        }
-        if (][j] === '') {
-board[0][2] if (board[0][2 !== '' && board[0][              makeMove(i, j] !== '' && board[0, 'O');
-2] === board[][2] === board[1][1] && board[0][              return;
-            }
-          }
-       1][1] && board[0][2] === board[2][2] === }
-      board[2][0]) {
-         0]) {
-          alert(`Player }
 
-      for (let i = 0; i <  ${board[ alert(`Player ${board[00][2]} wins on diagonal from3; i++) {
-       ][2]} wins on diagonal from top const row = board[i];
--right to bottom-left! top-right to bottom-left!`);
-        const rowElement = document.createElement('`);
-          return;
-                 return;
-        }
-        }
-        // Check for a tie
-div');
-        rowElement.class // Check for a tie
-        ifList.add('row');
- (!board.flat().includes        if (!board.flat().('')) {
-          alert('It        for (let j = 0includes('')) {
-          alert('; j < 3; j++) {\'s a tie!');
-         It\'s a tie!');
- return;
-        }
-               return;
-        }
-     
-          const cell = row[ }
+    <script src="script.js"></script>
+</body>
 
-      function aiMove()j];
-          const cellElement }
-
-      function aiMove = document.createElement('div');() {
-        // Add A {
-        // Add AI
-          cellElement.innerTextI logic here to choose the best logic here to choose the best move
- = cell;
-          cellElement        // For simplicity, we' move
-        // For simplicity,.addEventListener('click', () => { we'll just choose the firstll just choose the first available cell
- available cell
-        for (let i        for (let i = 
-            makeMove(i, j, 'X');
-            ai = 0; i0; i < 3; i++) < 3; i++) {
-          for ( {
-          for (let j = Move();
-          });
-          rowElementlet j = 0; j < .appendChild(cellElement);
-        }0; j < 33; j++) {
-           
-        boardElement.appendChild(; j++) {
-            if (board[ if (board[i][j]rowElement);
-      }
-i][j] === '') {    </script>
-  </body> === '') {
-              makeMove(i
-              makeMove(i, j,
 </html>
