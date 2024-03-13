@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'tac';
-    src: url(../font/TicTacToe.ttf);
+    src: url(TicTacToe.ttf);
 }
 .container {
     flex: 1;
